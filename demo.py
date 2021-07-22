@@ -5,21 +5,20 @@ import re
 import csv
 import math
 
-d_data = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
-          'W', 'X', 'Y', 'Z']
+d_data = ['Sp', 'Sq', 'Sr', 'St', 'Su', 'Sw', 'Sy', 'Tj', 'Tk', 'Tl', 'Tn', 'To', 'Tp', 'Tq', 'Tr', 'Ts', 'Tu', 'Tv', 'Tw', 'Tx', 'Ty', 'Wi', 'Wj', 'Wk', 'Wl', 'Wm', 'Wn', 'Wo', 'Wp', 'Wr', 'Ws', 'Wt', 'Wu', 'Wx', 'Wy']
 
 # CE CODE, Eng Name, Chinese Name, Address, Active, Phone no., Fax no, Email, R01...R06
 
 
 def get_list(alphabet):
 
+    print (alphabet)
+
     url = "https://az-ae-app-fal-prod-webservice.azurewebsites.net/api/lawyer/"
 
-    # payload = '{\"lastName\":\"' + str(alphabet) + '\",\"lastNameSearchOption\":\"beginsWith\",\"otherName\":\"\",\"suburb\":\"\",\"region\":\"\",\"accreditedSpecialist\":\"\",\"page\":1,\"pageSize\":1000}'
+    payload = '{\"lastName\":\"' + str(alphabet) + '\",\"otherName\":\"\",\"suburb\":\"\",\"region\":\"\",\"accreditedSpecialist\":\"\",\"page\":1,\"pageSize\":10}'
 
-    payload = '{\"lastName\":\"' + str(alphabet)  +'\",\"otherName\":\"\",\"suburb\":\"\",\"region\":\"\",\"accreditedSpecialist\":\"\",\"page\":1,\"pageSize\":500}'
-
-    print (payload)
+    # payload = "{\"lastName\":\"Aa\",\"otherName\":\"\",\"suburb\":\"\",\"region\":\"\",\"accreditedSpecialist\":\"\",\"page\":\"1\",\"pageSize\":10}"
 
     headers = {
         'sec-ch-ua': "\"Chromium\";v=\"88\", \"Google Chrome\";v=\"88\", \";Not A Brand\";v=\"99\"",
@@ -40,8 +39,7 @@ def get_list(alphabet):
     json_data = json.loads(response.text)
 
     if 'resultCount' in json_data:
-        print ("Total Count" + str(json_data['resultCount']))
-        count = json_data['resultCount'] + 1000
+        count = json_data['resultCount'] + 100
 
         # noofpages = math.ceil(json_data['resultCount']/1000)
         # print (noofpages)
@@ -56,7 +54,7 @@ def get_list(alphabet):
 
         payload = '{\"lastName\":\"' + str(
             alphabet) + '\",\"otherName\":\"\",\"suburb\":\"\",\"region\":\"\",\"accreditedSpecialist\":\"\",\"page\":1,\"pageSize\":' + str(count)   +'}'
-        print (payload)
+
 
         headers = {
             'sec-ch-ua': "\"Chromium\";v=\"88\", \"Google Chrome\";v=\"88\", \";Not A Brand\";v=\"99\"",
@@ -81,7 +79,7 @@ def get_list(alphabet):
             print (len(items))
 
             for item in items:
-                print (item)
+                # print (item)
                 first_name = ''
                 last_name= ''
                 date_admitted = ''
@@ -95,7 +93,7 @@ def get_list(alphabet):
                 if 'id' in item:
                     corp_id = item['id']
 
-                    # print ('https://az-ae-app-fal-prod-webservice.azurewebsites.net/api/lawyer/' + str(corp_id))
+                    print ('https://az-ae-app-fal-prod-webservice.azurewebsites.net/api/lawyer/' + str(corp_id))
 
                     response2 = requests.request("GET", 'https://az-ae-app-fal-prod-webservice.azurewebsites.net/api/lawyer/' + str(corp_id))
 
@@ -159,7 +157,7 @@ def get_list(alphabet):
 
                     # print (arr)
 
-                    with open('merged12356.csv', 'a+') as csvfile:
+                    with open('new.csv', 'a+') as csvfile:
                         csvwriter = csv.writer(csvfile)
                         csvwriter.writerows(arr)
 
@@ -172,8 +170,9 @@ def get_list(alphabet):
 
 
 if __name__ == '__main__':
-    d_len = len(d_data)
-    i = 0
-    while i < d_len:
-        get_list(d_data[i])
-        i = i + 1
+
+    file = open('alphabet.txt','r')
+
+    for f in file:
+        alpha = f.replace('\n','')
+        get_list(alpha)

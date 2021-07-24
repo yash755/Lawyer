@@ -53,7 +53,7 @@ def get_list(alphabet):
         #     alphabet) + '\",\"lastNameSearchOption\":\"beginsWith\",\"otherName\":\"\",\"suburb\":\"\",\"region\":\"\",\"accreditedSpecialist\":\"\",\"page\":' + str(page) + ',\"pageSize\":1000}'
 
         payload = '{\"lastName\":\"' + str(
-            alphabet) + '\",\"otherName\":\"\",\"suburb\":\"\",\"region\":\"\",\"accreditedSpecialist\":\"\",\"page\":1,\"pageSize\":' + str(count)   +'}'
+            alphabet) + '\",\"lastNameSearchOption\":\"beginsWith\",\"otherName\":\"\",\"suburb\":\"\",\"region\":\"\",\"accreditedSpecialist\":\"\",\"page\":1,\"pageSize\":' + str(count)   +'}'
 
 
         headers = {
@@ -232,9 +232,9 @@ def get_list(alphabet):
 
                     arr.append(temp)
 
-                    print (arr)
+                    # print (arr)
 
-                    with open('new1.csv', 'a+') as csvfile:
+                    with open('new123.csv', 'a+') as csvfile:
                         csvwriter = csv.writer(csvfile)
                         csvwriter.writerows(arr)
 

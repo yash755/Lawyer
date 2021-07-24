@@ -82,12 +82,24 @@ def get_list(alphabet):
                 # print (item)
                 first_name = ''
                 last_name= ''
-                date_admitted = ''
-                company = ''
-                email = ''
-                class_type = ''
-                address = ''
-                phone =''
+                middleName = ''
+                preferredName = ''
+                admissionDate = ''
+                certificateType = ''
+                pcType = ''
+                placeOfPractice = ''
+                pClass = ''
+
+                streetAddress =''
+                postalAddress = ''
+                phoneWithAreaCode = ''
+                firmFaxWithAreaCode = ''
+                fullDx = ''
+                firmEmail = ''
+                region = ''
+                email =''
+                specialistAccreditation = ''
+                languages = ''
 
 
                 if 'id' in item:
@@ -102,62 +114,127 @@ def get_list(alphabet):
                     if 'firstName' in json_data2:
                         first_name = json_data2['firstName']
 
-
                     if 'lastName' in json_data2:
                         last_name = json_data2['lastName']
 
+                    if 'middleName' in json_data2:
+                        middleName = json_data2['middleName']
+
+                    if 'preferredName' in json_data2:
+                        preferredName = json_data2['preferredName']
 
                     if 'admissionDate' in json_data2:
-                        date_admitted = json_data2['admissionDate']
+                        admissionDate = json_data2['admissionDate']
+
+                    if 'certificateType' in json_data2:
+                        certificateType = json_data2['certificateType']
+
+                    if 'pcType' in json_data2:
+                        pcType = json_data2['pcType']
+
+                    if 'placeOfPractice' in json_data2:
+                        placeOfPractice = json_data2['placeOfPractice']
 
                     if 'placeOfPractice' in json_data2:
                         company = json_data2['placeOfPractice']
 
-                    if 'email' in json_data2:
-                        email = json_data2['email']
-
-
-                    if 'class' in json_data2:
-                        class_type = json_data2['class']
-
-
-                    if 'phoneWithAreaCode' in json_data2:
-                        phone = json_data2['phoneWithAreaCode']
-
+                    if 'pClass' in json_data2:
+                        pClass = json_data2['pClass']
 
                     if 'streetAddress' in json_data2:
 
                         if json_data2['streetAddress']:
 
                             if 'street' in json_data2['streetAddress']:
-                                address = address + json_data2['streetAddress']['street'] + ' '
+                                streetAddress = streetAddress + json_data2['streetAddress']['street'] + ' '
 
                             if 'suburb' in json_data2['streetAddress']:
-                                address = address + json_data2['streetAddress']['suburb'] + ' '
+                                streetAddress = streetAddress + json_data2['streetAddress']['suburb'] + ' '
 
                             if 'state' in json_data2['streetAddress']:
-                                address = address + json_data2['streetAddress']['state'] + ' '
+                                streetAddress = streetAddress + json_data2['streetAddress']['state'] + ' '
 
 
                             if 'postCode' in json_data2['streetAddress']:
-                                address = address + json_data2['streetAddress']['postCode'] + ' '
+                                streetAddress = streetAddress + json_data2['streetAddress']['postCode'] + ' '
+
+                    if 'postalAddress' in json_data2:
+
+                        if json_data2['postalAddress']:
+
+                            if 'street' in json_data2['postalAddress']:
+                                postalAddress = postalAddress + json_data2['streetAddress']['street'] + ' '
+
+                            if 'suburb' in json_data2['streetAddress']:
+                                postalAddress = postalAddress + json_data2['streetAddress']['suburb'] + ' '
+
+                            if 'state' in json_data2['streetAddress']:
+                                postalAddress = postalAddress + json_data2['streetAddress']['state'] + ' '
+
+
+                            if 'postCode' in json_data2['streetAddress']:
+                                postalAddress = postalAddress + json_data2['streetAddress']['postCode'] + ' '
+
+
+                    if 'phoneWithAreaCode' in json_data2:
+                        phoneWithAreaCode = json_data2['phoneWithAreaCode']
+
+                    if 'firmFaxWithAreaCode' in json_data2:
+                        firmFaxWithAreaCode = json_data2['firmFaxWithAreaCode']
+
+                    if 'fullDx' in json_data2:
+                        fullDx = json_data2['fullDx']
+
+                    if 'firmEmail' in json_data2:
+                        firmEmail = json_data2['firmEmail']
+
+                    if 'region' in json_data2:
+                        region = json_data2['region']
+
+                    if 'email' in json_data2:
+                        email = json_data2['email']
+
+                    if 'specialistAccreditation' in json_data2:
+                        accr = json_data2['specialistAccreditation']
+                        if accr:
+                            for acc in accr:
+                                specialistAccreditation = specialistAccreditation + acc + ','
+
+                    if 'languages' in json_data2:
+                        lang = json_data2['languages']
+                        if lang:
+                            for lan in lang:
+                                languages = languages + lan + ','
 
                     arr = []
                     temp = []
                     temp.append(first_name)
                     temp.append(last_name)
-                    temp.append(date_admitted)
-                    temp.append(company)
+                    temp.append(middleName)
+                    temp.append(preferredName)
+                    temp.append(admissionDate)
+                    temp.append(certificateType)
+                    temp.append(pcType)
+                    temp.append(placeOfPractice)
+
+                    temp.append(pClass)
+                    temp.append(streetAddress)
+                    temp.append(postalAddress)
+
+                    temp.append(phoneWithAreaCode)
+                    temp.append(firmFaxWithAreaCode)
+                    temp.append(fullDx)
+                    temp.append(firmEmail)
+                    temp.append(region)
                     temp.append(email)
-                    temp.append(class_type)
-                    temp.append(address)
-                    temp.append(phone)
+                    temp.append(specialistAccreditation)
+                    temp.append(languages)
 
                     arr.append(temp)
 
-                    # print (arr)
+                    print (arr)
 
-                    with open('new.csv', 'a+') as csvfile:
+                    with open('new1.csv', 'a+') as csvfile:
                         csvwriter = csv.writer(csvfile)
                         csvwriter.writerows(arr)
 
@@ -176,3 +253,7 @@ if __name__ == '__main__':
     for f in file:
         alpha = f.replace('\n','')
         get_list(alpha)
+
+        done = open('done.txt','a+')
+        done.write(alpha + '\n')
+        done.close()

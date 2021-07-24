@@ -1,7 +1,7 @@
 import csv
 
 
-with open('merged12356.csv','r') as in_file, open('mergedfinal2.csv','w') as out_file:
+with open('new.csv','r') as in_file, open('mergedfinal2.csv','w') as out_file:
     seen = set() # set for fast O(1) amortized lookup
     for line in in_file:
         if line in seen: continue # skip duplicate

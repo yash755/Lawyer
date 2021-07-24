@@ -107,7 +107,7 @@ def get_list(alphabet):
 
                     print ('https://az-ae-app-fal-prod-webservice.azurewebsites.net/api/lawyer/' + str(corp_id))
 
-                    response2 = requests.request("GET", 'https://az-ae-app-fal-prod-webservice.azurewebsites.net/api/lawyer/' + str('93004'))
+                    response2 = requests.request("GET", 'https://az-ae-app-fal-prod-webservice.azurewebsites.net/api/lawyer/' + str(corp_id))
 
                     json_data2 = json.loads(response2.text)
 

@@ -107,7 +107,7 @@ def get_list(alphabet):
 
                     print ('https://az-ae-app-fal-prod-webservice.azurewebsites.net/api/lawyer/' + str(corp_id))
 
-                    response2 = requests.request("GET", 'https://az-ae-app-fal-prod-webservice.azurewebsites.net/api/lawyer/' + str(corp_id))
+                    response2 = requests.request("GET", 'https://az-ae-app-fal-prod-webservice.azurewebsites.net/api/lawyer/' + str('93004'))
 
                     json_data2 = json.loads(response2.text)
 
@@ -163,17 +163,17 @@ def get_list(alphabet):
                         if json_data2['postalAddress']:
 
                             if 'street' in json_data2['postalAddress']:
-                                postalAddress = postalAddress + json_data2['streetAddress']['street'] + ' '
+                                postalAddress = postalAddress + json_data2['postalAddress']['street'] + ' '
 
-                            if 'suburb' in json_data2['streetAddress']:
-                                postalAddress = postalAddress + json_data2['streetAddress']['suburb'] + ' '
+                            if 'suburb' in json_data2['postalAddress']:
+                                postalAddress = postalAddress + json_data2['postalAddress']['suburb'] + ' '
 
-                            if 'state' in json_data2['streetAddress']:
-                                postalAddress = postalAddress + json_data2['streetAddress']['state'] + ' '
+                            if 'state' in json_data2['postalAddress']:
+                                postalAddress = postalAddress + json_data2['postalAddress']['state'] + ' '
 
 
-                            if 'postCode' in json_data2['streetAddress']:
-                                postalAddress = postalAddress + json_data2['streetAddress']['postCode'] + ' '
+                            if 'postCode' in json_data2['postalAddress']:
+                                postalAddress = postalAddress + json_data2['postalAddress']['postCode'] + ' '
 
 
                     if 'phoneWithAreaCode' in json_data2:
